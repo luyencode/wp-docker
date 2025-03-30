@@ -1,67 +1,64 @@
+# WordPress Docker Setup
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+## Overview
 
-# Deploy Wordpress on Localhost and in Production using Docker Compose
+This project provides a Docker-based setup for a WordPress development environment. It includes services for WordPress, MySQL, phpMyAdmin, and WP-CLI, with auto-configuration capabilities.
 
-Related blog post:
+## Prerequisites
 
-  - [WordPress Local Development Using Docker
-    Compose](https://www.datanovia.com/en/lessons/wordpress-local-development-using-docker-compose/):
-    Deploy Wordpress on localhost using docker
-  - [Docker WordPress Production
-    Deployment](https://www.datanovia.com/en/lessons/docker-wordpress-production-deployment/):
-    Step-by-step guide to deploy WordPress online using docker-compose
-  - [Using Docker WordPress Cli to Manage WordPress
-    Websites](https://www.datanovia.com/en/lessons/using-docker-wordpress-cli-to-manage-wordpress-websites/):
-    Commande line interface for managing a WordPress website
+- Docker
+- Docker Compose
 
-The installation tool kit, provided here, include:
+## Features
 
-  - Nginx web server
-  - MariaDB/MySQL used for Wordpress database
-  - phpMyAdmin interface to connect to your MySQL database
-  - WP-Cli: Wordpress Command Line Interface
-  - Makefile directives for automatization.
+- WordPress installation with auto-configuration
+- MySQL database
+- phpMyAdmin for database management
+- WP-CLI for command-line management of WordPress
+- Health check for service availability
 
-You can automatically deploy a local docker wordpress site in 5 minutes
-using the following commands:
+## Setup
 
-``` bash
-# Download a wordpress docker-compose example
-git clone https://github.com/kassambara/wordpress-docker-compose
-cd wordpress-docker-compose
-# Build and start installation
-docker-compose up -d --build
-```
+1. **Clone the repository:**
 
-Visit your site at <http://localhost> and your database via phpMyAdmin
-at <http://localhost:8080>.
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
 
-Default identification for your wordpress website admin:
+2. **Environment Configuration:**
 
-  - `Username: wordpress` and
-  - `Password: wordpress`
+   Customize environment variables in the `wp-auto-config.yml` and `docker-compose.yml` files to suit your setup.
 
-Default identification for the phpMyAdmin interface:
+3. **Build and Start Services:**
 
-  - `Username: root` and
-  - `Password: password`
+   Run the following command to build and start the services:
 
-**Useful set of commands to know**:
+   ```bash
+   make install
+   ```
 
-``` bash
-# Stop and remove containers
-docker-compose down
-# Build, and start the wordpress website
-docker-compose up -d --build
-# Reset everything
-docker-compose down
-rm -rf certs/* certs-data/* logs/nginx/* mysql/* wordpress/*
-```
+   This will start the WordPress and MySQL services, perform health checks, and apply WordPress auto-configuration.
 
-## References
+4. **Access WordPress:**
 
-  - [WordPress: with Nginx web server in
-    Docker](https://github.com/mjstealey/wordpress-nginx-docker)
-  - [Quickstart: Compose and
-    WordPress](https://docs.docker.com/compose/wordpress/)
+   Open your web browser and navigate to `http://localhost` to access your WordPress site.
+
+5. **Access phpMyAdmin:**
+
+   Access phpMyAdmin at `http://localhost:<PHPMYADMIN_PORT>` for database management.
+
+## Makefile Commands
+
+- `start`: Build and start the Docker containers
+- `healthcheck`: Run health checks for services
+- `down`: Stop and remove containers
+- `install`: Start services and perform health checks
+- `configure`: Run WordPress auto-configuration
+- `autoinstall`: Start services and run auto-configuration
+- `clean`: Remove related files and folders
+- `reset`: Clean the setup
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
